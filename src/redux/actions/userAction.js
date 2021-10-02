@@ -50,15 +50,17 @@ export const login = (email, password) => async (dispatch) => {
         "http://localhost:5000/api/users/login",
         { email, password },
         config
-      );
-      console.log("data is ", data);
+        );
+
+        localStorage.setItem("myToken", JSON.stringify(data.token));
+        
+        console.log("data is ", data);
       dispatch({
         type: USER_LOGIN_SUCCESS,
         payload: data,
       });
   
      
-       localStorage.setItem("myToken", JSON.stringify(data.token));
     } catch (error) {
       dispatch({
         type: USER_LOGIN_FAIL,
